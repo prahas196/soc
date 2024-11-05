@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Container and Child Component</title>
+  <style>
+    .container {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2e6da4;
+    }
+    .child {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    I'm a container component
+    <br><br>
+    <input type="text" placeholder="Enter text here" oninput="updateChildText(this.value)" />
+  </div>
+
+  <div class="child">
+    Child Component
+    <br>
+    <span id="childText">Angular 10</span>
+  </div>
+
+  <script>
+    // Function to update the text in the child component
+    function updateChildText(value) {
+      document.getElementById('childText').innerText = value || "Angular 10";
+    }
+  </script>
+</body>
+</html>

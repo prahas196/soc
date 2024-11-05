@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Encapsulation with Angular</title>
+  <style>
+    .app-component {
+      padding: 8px;
+      margin: 6px;
+      border: 2px solid red;
+    }
+    .first-component {
+      padding: 8px;
+      margin: 6px;
+      border: 2px solid blue;
+    }
+    .second-component {
+      padding: 8px;
+      margin: 6px;
+      border: 2px solid green;
+    }
+  </style>
+</head>
+<body>
+  <h2>CSS Encapsulation with Angular</h2>
+
+  <!-- App Component -->
+  <div class="app-component">
+    App Component
+
+    <!-- First Component inside App Component -->
+    <div class="first-component">
+      First Component
+    </div>
+
+    <!-- Second Component inside App Component -->
+    <div class="second-component">
+      Second Component
+    </div>
+  </div>
+</body>
+</html>

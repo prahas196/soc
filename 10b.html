@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour of Books</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h2 {
+            color: #3366cc;
+            text-align: center;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .nav-buttons button {
+            background-color: #e7e7e7;
+            color: #333;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .nav-buttons button:hover {
+            background-color: #d0d0d0;
+        }
+        .login-container {
+            text-align: center;
+            margin: auto;
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .login-container button {
+            background-color: #3366cc;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .login-container button:hover {
+            background-color: #2855a6;
+        }
+        .hidden {
+            display: none;
+        }
+        .book-list {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .book-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .book-card {
+            background-color: #607d8b;
+            color: #ffffff;
+            padding: 20px;
+            width: 180px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1.2em;
+        }
+        .book-card:hover {
+            background-color: #546e7a;
+        }
+        .book-detail input {
+            padding: 5px;
+            font-size: 1em;
+            margin-top: 5px;
+        }
+        .back-button {
+            margin-top: 20px;
+            background-color: #3366cc;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .back-button:hover {
+            background-color: #2855a6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Title -->
+    <h2>Tour of Books</h2>
+
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <button onclick="showDashboard()">Dashboard</button>
+        <button onclick="showBooks()">Books</button>
+    </div>
+
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <h3>Login Form</h3>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="login()">Login</button>
+        <p id="loginError" style="color: red;"></p>
+    </div>
+
+    <!-- Book List View -->
+    <div id="bookList" class="book-list hidden">
+        <h3>Top Books</h3>
+        <div class="book-cards" id="bookCards"></div>
+    </div>
+
+    <!-- Book Detail View -->
+    <div id="bookDetail" class="book-detail hidden">
+        <h3 id="detailTitle">Book Details</h3>
+        <p><strong>id:</strong> <span id="bookId"></span></p>
+        <p>
+            <strong>name:</strong> 
+            <input type="text" id="bookName" readonly>
+        </p>
+        <button class="back-button" onclick="showBooks()">Back</button>
+    </div>
+
+    <script>
+        // Sample book data
+        const books = [
+            { id: 1, name: 'CSS 3' },
+            { id: 2, name: 'JavaScript' },
+            { id: 3, name: 'Ajax Programming' },
+            { id: 4, name: 'jQuery' }
+        ];
+
+        // Function to handle login
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simple validation (You can replace this with actual authentication logic)
+            if (username === "user" && password === "password") {
+                document.getElementById('loginPage').classList.add('hidden');
+                document.getElementById('bookList').classList.remove('hidden');
+                renderBooks(); // Render books once logged in
+            } else {
+                document.getElementById('loginError').innerText = "Invalid username or password!";
+            }
+        }
+
+        // Function to display the list of books
+        function renderBooks() {
+            const bookCards = document.getElementById('bookCards');
+            bookCards.innerHTML = ''; // Clear existing content
+
+            books.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'book-card';
+                bookCard.textContent = book.name;
+                bookCard.onclick = () => showBookDetail(book.id);
+                bookCards.appendChild(bookCard);
+            });
+        }
+
+        // Function to show book detail
+        function showBookDetail(id) {
+            const book = books.find(b => b.id === id);
+            if (book) {
+                document.getElementById('bookList').classList.add('hidden');
+                document.getElementById('bookDetail').classList.remove('hidden');
+
+                document.getElementById('bookId').innerText = book.id;
+                document.getElementById('bookName').value = book.name;
+                document.getElementById('detailTitle').innerText = `${book.name} details!`;
+            }
+        }
+
+        // Function to navigate back to the book list view
+        function showBooks() {
+            document.getElementById('bookList').classList.remove('hidden');
+            document.getElementById('bookDetail').classList.add('hidden');
+        }
+
+        // Function to show the Dashboard (can add functionality later)
+        function showDashboard() {
+            alert("Dashboard functionality not implemented in this example.");
+        }
+    </script>
+
+</body>
+</html>

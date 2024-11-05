@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2 {
+      color: #2e6da4;
+    }
+    form, #summary {
+      padding: 20px;
+      border: 2px solid #2e6da4;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      max-width: 400px;
+    }
+    form div {
+      margin-bottom: 15px;
+    }
+    label {
+      display: inline-block;
+      width: 100px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: calc(100% - 110px);
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #2e6da4;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Course Registration Form</h1>
+
+  <form id="registrationForm">
+    <div>
+      <label for="fullName">Full Name</label>
+      <input type="text" id="fullName" name="fullName" required>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="course">Select Course</label>
+      <select id="course" name="course" required>
+        <option value="webdev">Web Development</option>
+        <option value="mobiledev">Mobile App Development</option>
+        <option value="datasci">Data Science</option>
+        <option value="design">Graphic Design</option>
+      </select>
+    </div>
+    <div>
+      <label for="comments">Comments</label>
+      <textarea id="comments" name="comments"></textarea>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="summary" style="display: none;">
+    <h2>Registration Summary:</h2>
+    <p><strong>Full Name:</strong> <span id="summaryFullName"></span></p>
+    <p><strong>Email:</strong> <span id="summaryEmail"></span></p>
+    <p><strong>Course:</strong> <span id="summaryCourse"></span></p>
+    <p><strong>Comments:</strong> <span id="summaryComments"></span></p>
+  </div>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const summary = document.getElementById('summary');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Get form data
+      const fullName = document.getElementById('fullName').value;
+      const email = document.getElementById('email').value;
+      const course = document.getElementById('course').value;
+      const comments = document.getElementById('comments').value;
+
+      // Display summary
+      document.getElementById('summaryFullName').innerText = fullName;
+      document.getElementById('summaryEmail').innerText = email;
+      document.getElementById('summaryCourse').innerText = course;
+      document.getElementById('summaryComments').innerText = comments;
+
+      summary.style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>

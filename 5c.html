@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            display: none; /* Initially hidden */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h3>Course List</h3>
+    <button id="viewCoursesBtn">View Course List</button>
+
+    <table border="1" id="coursesTable">
+        <thead>
+            <tr>
+                <th>Course ID</th>
+                <th>Course Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>CS101</td>
+                <td>Introduction to Computer Science</td>
+            </tr>
+            <tr>
+                <td>CS102</td>
+                <td>Data Structures</td>
+            </tr>
+            <tr>
+                <td>CS103</td>
+                <td>Web Development</td>
+            </tr>
+            <tr>
+                <td>CS104</td>
+                <td>Database Management</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('viewCoursesBtn').addEventListener('click', function() {
+            const coursesTable = document.getElementById('coursesTable');
+            // Toggle visibility
+            if (coursesTable.style.display === 'none' || coursesTable.style.display === '') {
+                coursesTable.style.display = 'table'; // Show the table
+                this.textContent = 'Hide Course List'; // Change button text
+            } else {
+                coursesTable.style.display = 'none'; // Hide the table
+                this.textContent = 'View Course List'; // Reset button text
+            }
+        });
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,56 @@
+<h2>Course Details</h2>
+<p>Select a course to view:</p>
+
+<!-- Dropdown to select a course -->
+<select #course (change)="onCourseSelect(course.value)">
+    <option value="" disabled selected>Select a course</option>
+    <option value="1">Node JS</option>
+    <option value="2">Typescript</option>
+    <option value="3">Angular</option>
+    <option value="4">React JS</option>
+</select>
+
+<br /><br />
+
+<!-- Table to display selected course details -->
+<table border="1" *ngIf="selectedCourse">
+    <thead>
+        <tr>
+            <th>Course ID</th>
+            <th>Course Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td *ngIf="selectedCourseId">{{ selectedCourseId }}</td>
+            <td *ngIf="selectedCourseName">{{ selectedCourseName }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<script>
+    // Mockup script for demonstration purposes
+    let selectedCourseId = null;
+    let selectedCourseName = null;
+
+    document.querySelector('select').addEventListener('change', function() {
+        const courseId = this.value;
+        if (courseId === "1") {
+            selectedCourseId = "1";
+            selectedCourseName = "Node JS";
+        } else if (courseId === "2") {
+            selectedCourseId = "2";
+            selectedCourseName = "Typescript";
+        } else if (courseId === "3") {
+            selectedCourseId = "3";
+            selectedCourseName = "Angular";
+        } else if (courseId === "4") {
+            selectedCourseId = "4";
+            selectedCourseName = "React JS";
+        }
+
+        // Update the table to reflect the selected course
+        document.querySelector('table tbody tr td:first-child').textContent = selectedCourseId;
+        document.querySelector('table tbody tr td:last-child').textContent = selectedCourseName;
+    });
+</script>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Courses List</title>
+</head>
+<body>
+  <h2>Courses List</h2>
+
+  <!-- Courses list section -->
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Course ID</th>
+        <th>Course Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="coursesTableBody">
+      <!-- Rows will be dynamically populated -->
+    </tbody>
+  </table>
+
+  <br /><br />
+
+  <!-- Display registration message if available -->
+  <div id="message"></div>
+
+  <script>
+    // Define courses data
+    const courses = [
+      { courseId: 1, courseName: 'Node JS' },
+      { courseId: 2, courseName: 'Typescript' },
+      { courseId: 3, courseName: 'Angular' },
+      { courseId: 4, courseName: 'React JS' }
+    ];
+
+    // Function to register for a course
+    function register(courseName) {
+      const messageDiv = document.getElementById('message');
+      messageDiv.innerText = `You have registered for ${courseName}.`;
+    }
+
+    // Populate the courses table
+    const coursesTableBody = document.getElementById('coursesTableBody');
+    courses.forEach(course => {
+      const row = document.createElement('tr');
+
+      // Create course ID cell
+      const idCell = document.createElement('td');
+      idCell.innerText = course.courseId;
+      row.appendChild(idCell);
+
+      // Create course name cell
+      const nameCell = document.createElement('td');
+      nameCell.innerText = course.courseName;
+      row.appendChild(nameCell);
+
+      // Create action button cell
+      const actionCell = document.createElement('td');
+      const button = document.createElement('button');
+      button.innerText = 'Register';
+      button.onclick = () => register(course.courseName);
+      actionCell.appendChild(button);
+      row.appendChild(actionCell);
+
+      // Append row to the table body
+      coursesTableBody.appendChild(row);
+    });
+  </script>
+</body>
+</html>

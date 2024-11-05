@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attribute Directive Simulation</title>
+  <style>
+    .container {
+      border: 1px solid lightgray;
+      padding: 20px;
+      width: 200px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    .message {
+      color: red;
+      display: none; /* Hidden by default */
+    }
+    .clickable {
+      color: magenta;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Attribute Directive</h2>
+    <p class="clickable" onclick="showMessage()">Click Here</p>
+    <p id="message" class="message">Hello, I am from attribute directive</p>
+  </div>
+
+  <script>
+    function showMessage() {
+      const message = document.getElementById('message');
+      message.style.display = 'block'; // Show the message
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Border Toggle</title>
+  <style>
+    .bordered-box {
+      padding: 10px;
+      text-align: center;
+      width: 150px;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    .bordered {
+      border: 2px dashed black;
+    }
+  </style>
+</head>
+<body>
+  <div class="bordered-box" id="box">Border ON</div>
+  <br>
+  <button onclick="toggleBorder()">Toggle Border</button>
+
+  <script>
+    function toggleBorder() {
+      const box = document.getElementById("box");
+      if (box.classList.contains("bordered")) {
+        box.classList.remove("bordered");
+        box.textContent = "Border OFF";
+      } else {
+        box.classList.add("bordered");
+        box.textContent = "Border ON";
+      }
+    }
+  </script>
+</body>
+</html>

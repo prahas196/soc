@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Books</title>
+  <style>
+    .books {
+      list-style-type: none;
+      padding: 0;
+      width: 200px;
+      margin-bottom: 1em;
+    }
+    .books li {
+      cursor: pointer;
+      background-color: #eee;
+      margin: 0.5em 0;
+      padding: 0.5em;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+    }
+    .books .badge {
+      background-color: #607d8b;
+      color: white;
+      padding: 0.5em;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+    .btn {
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+    table {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>My Books</h2>
+  <ul id="booksList" class="books">
+    <!-- Book items will be dynamically added here -->
+  </ul>
+  <button class="btn" onclick="showAddBookForm()">Add Book</button>
+  <button class="btn" onclick="showUpdateBookForm()">Update Book</button>
+  <button class="btn" onclick="showDeleteBookForm()">Delete Book</button>
+  <br />
+
+  <!-- Add Book Form -->
+  <div id="addBookForm" style="display: none;">
+    <h3>Add a New Book</h3>
+    <table>
+      <tr>
+        <td>Enter Id of the book:</td>
+        <td><input type="number" id="addBookId" /></td>
+      </tr>
+      <tr>
+        <td>Enter Name of the Book:</td>
+        <td><input type="text" id="addBookName" /></td>
+      </tr>
+      <tr>
+        <td><button class="btn" onclick="addBook()">Add Record</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Update Book Form -->
+  <div id="updateBookForm" style="display: none;">
+    <h3>Update an Existing Book</h3>
+    <table>
+      <tr>
+        <td>Enter Id of the book:</td>
+        <td><input type="number" id="updateBookId" /></td>
+      </tr>
+      <tr>
+        <td>Enter New Name of the Book:</td>
+        <td><input type="text" id="updateBookName" /></td>
+      </tr>
+      <tr>
+        <td><button class="btn" onclick="updateBook()">Update Record</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Delete Book Form -->
+  <div id="deleteBookForm" style="display: none;">
+    <h3>Delete a Book</h3>
+    <table>
+      <tr>
+        <td>Enter Id of the book:</td>
+        <td><input type="number" id="deleteBookId" /></td>
+      </tr>
+      <tr>
+        <td><button class="btn" onclick="deleteBook()">Delete Record</button></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="error" id="errorMessage" style="display: none;"></div>
+
+  <script>
+    let books = [
+      { id: 1, name: "The Great Gatsby" },
+      { id: 2, name: "To Kill a Mockingbird" },
+      { id: 3, name: "1984" }
+    ];
+
+    function displayBooks() {
+      const booksList = document.getElementById('booksList');
+      booksList.innerHTML = '';
+      books.forEach(book => {
+        const li = document.createElement('li');
+        li.innerHTML = `<span class="badge">${book.id}</span> ${book.name}`;
+        booksList.appendChild(li);
+      });
+    }
+
+    function showAddBookForm() {
+      hideForms();
+      document.getElementById('addBookForm').style.display = 'block';
+    }
+
+    function showUpdateBookForm() {
+      hideForms();
+      document.getElementById('updateBookForm').style.display = 'block';
+    }
+
+    function showDeleteBookForm() {
+      hideForms();
+      document.getElementById('deleteBookForm').style.display = 'block';
+    }
+
+    function hideForms() {
+      document.getElementById('addBookForm').style.display = 'none';
+      document.getElementById('updateBookForm').style.display = 'none';
+      document.getElementById('deleteBookForm').style.display = 'none';
+      document.getElementById('errorMessage').style.display = 'none';
+    }
+
+    function addBook() {
+      const id = parseInt(document.getElementById('addBookId').value);
+      const name = document.getElementById('addBookName').value;
+      if (isNaN(id) || !name) {
+        showError("Please enter valid book ID and name.");
+        return;
+      }
+      books.push({ id, name });
+      displayBooks();
+      hideForms();
+    }
+
+    function updateBook() {
+      const id = parseInt(document.getElementById('updateBookId').value);
+      const name = document.getElementById('updateBookName').value;
+      const book = books.find(b => b.id === id);
+      if (!book || !name) {
+        showError("Book not found or invalid name.");
+        return;
+      }
+      book.name = name;
+      displayBooks();
+      hideForms();
+    }
+
+    function deleteBook() {
+      const id = parseInt(document.getElementById('deleteBookId').value);
+      const bookIndex = books.findIndex(b => b.id === id);
+      if (bookIndex === -1) {
+        showError("Book not found.");
+        return;
+      }
+      books.splice(bookIndex, 1);
+      displayBooks();
+      hideForms();
+    }
+
+    function showError(message) {
+      const errorMessage = document.getElementById('errorMessage');
+      errorMessage.textContent = message;
+      errorMessage.style.display = 'block';
+    }
+
+    displayBooks();
+  </script>
+</body>
+</html>

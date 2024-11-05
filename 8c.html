@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Using Observables</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h6 {
+      margin-bottom: 0;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 2rem;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <b>Using Observables!</b>
+  <h6 style="margin-bottom: 0">VALUES:</h6>
+  <div id="values"></div>
+  <div style="margin-bottom: 0">ERRORS: <span id="errors">None</span></div>
+  <div style="margin-bottom: 0">FINISHED: <span id="finished">No</span></div>
+  <button onclick="fetchData()">Fetch Data</button>
+
+  <script>
+    function fetchData() {
+      const valuesDiv = document.getElementById('values');
+      const errorsSpan = document.getElementById('errors');
+      const finishedSpan = document.getElementById('finished');
+
+      // Clear previous data
+      valuesDiv.innerHTML = '';
+      errorsSpan.textContent = 'None';
+      finishedSpan.textContent = 'No';
+
+      // Simulate observable data
+      const data = [1, 2, 3, 4, 5];
+      const error = null; // Change to a string (e.g., "Error fetching data") to simulate an error
+
+      data.forEach((value, index) => {
+        setTimeout(() => {
+          const div = document.createElement('div');
+          div.textContent = value;
+          valuesDiv.appendChild(div);
+
+          // Check if it's the last value
+          if (index === data.length - 1) {
+            finishedSpan.textContent = 'Yes';
+          }
+        }, index * 500);
+      });
+
+      // Simulate error handling
+      setTimeout(() => {
+        if (error) {
+          errorsSpan.textContent = error;
+          finishedSpan.textContent = 'Yes';
+        }
+      }, data.length * 500);
+    }
+  </script>
+
+</body>
+</html>

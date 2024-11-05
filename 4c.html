@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Two-Way Binding Simulation</title>
+</head>
+<body>
+  <input type="text" id="nameInput" oninput="updateName()" placeholder="Enter your name"> <br/>
+  <div>Hello, <span id="nameDisplay"></span></div>
+
+  <script>
+    function updateName() {
+      const nameInput = document.getElementById('nameInput').value;
+      document.getElementById('nameDisplay').textContent = nameInput;
+    }
+  </script>
+</body>
+</html>
